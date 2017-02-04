@@ -9,7 +9,7 @@ Auteur
 
 Compile
 
-	g++ main.cpp -o	mot_mystere
+	g++ main.cpp utils.cpp -o mot_mystere
 
 Execute
 
