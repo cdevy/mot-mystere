@@ -1,45 +1,9 @@
 #include <iostream>
-#include <ctime>
-#include <cstdlib>
 #include <string>
+#include <fstream>
+#include "utils.h"
 
 using namespace std;
-
-string melangerLettres(string mot) {
-  string motMelange;
-  int nbAleatoire;
-  int nbLettres(mot.size());
-
-  // Initialisation du générateur de nombres aléatoires
-  srand(time(0));
-
-  while (nbLettres > 0) {
-    nbAleatoire = rand() % nbLettres;
-
-    // Ajout de la lettre tirée aléatoirement au mot mélangé
-    motMelange.push_back(mot[nbAleatoire]);
-
-    // Suppression de la lettre déjà tirée (afin de ne plus la tirer)
-    mot.erase(nbAleatoire,1);
-
-    --nbLettres;
-  }
-
-  return motMelange;
-}
-
-void nouvellePartie(bool & stop) {
-  char reponse;
-  cout << "Voulez-vous faire une autre partie ? (O/N)" << endl;
-  cin >> reponse;
-  cout << endl;
-
-  if (reponse == 'N') {
-    stop = true;
-  } else if (reponse != 'O') {
-    nouvellePartie(stop);
-  }
-}
 
 int main() {
   string mot;
@@ -51,9 +15,15 @@ int main() {
     motTrouve = false;
     essais = 5;
 
-    cout << "Saisissez un mot : " << endl;
-    cin >> mot;
-    cout << endl;
+    // Ouverture du fichier en lecture seule
+    ifstream fichier("dico.txt");
+
+    if (!fichier) {
+      cout << "ERREUR: Impossible d'ouvrir le fichier en lecture." << endl;
+      return 0;
+    }
+
+    mot = motAleatoire(fichier);
 
     while(!motTrouve) {
       string motPropose;
@@ -78,7 +48,7 @@ int main() {
           cout << endl;
         } else {
           motTrouve = true;
-          cout << "Vous avez perdu !" << endl;
+          cout << "Vous avez perdu ! Le mot mystère était : " << mot << endl;
           cout << endl;
 
           nouvellePartie(stop);
