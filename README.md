@@ -17,10 +17,14 @@ Execute
 
 ## Versions
 
-### Version originale
+### Version originale   
+Le premier joueur choisit un mot puis le deuxième tente de le retrouver à partir des lettres mélangées.
 
-### Bonus 1 : Proposer au joueur de faire une nouvelle partie 
+### Bonus 1 : Proposer au joueur de faire une nouvelle partie   
+Une fois le mot mystère trouvé, on propose au joueur de jouer une nouvelle partie en tapant 'O' ou d'arrêter de jouer en tapant 'N'. Tout autre caractère est considéré comme une erreur et repose la question au joueur.  
 
 ### Bonus 2 : Fixer un nombre maximal de coups
+On contraint le joueur à 5 essais pour trouver le mot mystère ou bien il perd la partie. 
 
-### Bonus 3 : Piocher le mot dans un fichier-dictionnaire
+### Bonus 3 : Piocher le mot dans un fichier-dictionnaire  
+On modifie le jeu pour qu'il n'y ait qu'un seul joueur. Le mot est généré aléatoirement à partir d'un fichier-dictionnaire.
