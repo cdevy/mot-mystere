@@ -28,13 +28,28 @@ string melangerLettres(string mot) {
   return motMelange;
 }
 
+void nouvellePartie(bool & stop) {
+  char reponse;
+  cout << "Voulez-vous faire une autre partie ? (O/N)" << endl;
+  cin >> reponse;
+  cout << endl;
+
+  if (reponse == 'N') {
+    stop = true;
+  } else if (reponse != 'O') {
+    nouvellePartie(stop);
+  }
+}
+
 int main() {
   string mot;
   bool motTrouve;
   bool stop(false);
+  int essais;
 
   do {
     motTrouve = false;
+    essais = 5;
 
     cout << "Saisissez un mot : " << endl;
     cin >> mot;
@@ -42,7 +57,6 @@ int main() {
 
     while(!motTrouve) {
       string motPropose;
-      char nouvellePartie;
 
       cout << "Quel est le mot mystère ? " << melangerLettres(mot) << endl;
       cin >> motPropose;
@@ -52,21 +66,23 @@ int main() {
         cout << endl;
         motTrouve = true;
 
-        cout << "Voulez-vous faire une autre partie ? (O/N)" << endl;
-        cin >> nouvellePartie;
-        cout << endl;
-
-        if (nouvellePartie == 'N') {
-          stop = true;
-        } else if (nouvellePartie != 'O') {
-          cout << "Voulez-vous faire une autre partie ? (O/N)" << endl;
-          cin >> nouvellePartie;
-          cout << endl;
-        }
+        nouvellePartie(stop);
 
       } else {
         cout << "Ce n'est pas le mot mystère !" << endl;
         cout << endl;
+
+        if (essais > 1) {
+          --essais;
+          cout << "Il vous reste " << essais << " essai(s)." << endl;
+          cout << endl;
+        } else {
+          motTrouve = true;
+          cout << "Vous avez perdu !" << endl;
+          cout << endl;
+
+          nouvellePartie(stop);
+        }
       }
     }
 
