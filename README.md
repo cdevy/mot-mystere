@@ -1,4 +1,5 @@
 # mot_mystere
 
-Auteur
+Auteurs
+
 	Charlotte DEVY
