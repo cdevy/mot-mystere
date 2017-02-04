@@ -14,3 +14,13 @@ Compile
 Execute
 
 	./mot_mystere
+
+## Versions
+
+### Version originale
+
+### Bonus 1 : Proposer au joueur de faire une nouvelle partie 
+
+### Bonus 2 : Fixer un nombre maximal de coups
+
+### Bonus 3 : Piocher le mot dans un fichier-dictionnaire
