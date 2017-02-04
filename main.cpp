@@ -5,8 +5,7 @@
 
 using namespace std;
 
-string melangerLettres(string mot)
-{
+string melangerLettres(string mot) {
   string motMelange;
   int nbAleatoire;
   int nbLettres(mot.size());
@@ -14,8 +13,7 @@ string melangerLettres(string mot)
   // Initialisation du générateur de nombres aléatoires
   srand(time(0));
 
-  while (nbLettres > 0)
-  {
+  while (nbLettres > 0) {
     nbAleatoire = rand() % nbLettres;
 
     // Ajout de la lettre tirée aléatoirement au mot mélangé
@@ -30,34 +28,49 @@ string melangerLettres(string mot)
   return motMelange;
 }
 
-int main()
-{
+int main() {
   string mot;
-  bool motTrouve(false);
+  bool motTrouve;
+  bool stop(false);
 
-  cout << "Saisissez un mot : " << endl;
-  cin >> mot;
-  cout << endl;
+  do {
+    motTrouve = false;
 
-  while(!motTrouve)
-  {
-    string motPropose;
+    cout << "Saisissez un mot : " << endl;
+    cin >> mot;
+    cout << endl;
 
-    cout << "Quel est le mot mystère ? " << melangerLettres(mot) << endl;
-    cin >> motPropose;
+    while(!motTrouve) {
+      string motPropose;
+      char nouvellePartie;
 
-    if (motPropose.compare(mot) == 0)
-    {
-      cout << "Bravo ! Vous avez trouvé le mot mystère !" << endl;
-      cout << endl;
-      motTrouve = true;
+      cout << "Quel est le mot mystère ? " << melangerLettres(mot) << endl;
+      cin >> motPropose;
+
+      if (motPropose.compare(mot) == 0) {
+        cout << "Bravo ! Vous avez trouvé le mot mystère !" << endl;
+        cout << endl;
+        motTrouve = true;
+
+        cout << "Voulez-vous faire une autre partie ? (O/N)" << endl;
+        cin >> nouvellePartie;
+        cout << endl;
+
+        if (nouvellePartie == 'N') {
+          stop = true;
+        } else if (nouvellePartie != 'O') {
+          cout << "Voulez-vous faire une autre partie ? (O/N)" << endl;
+          cin >> nouvellePartie;
+          cout << endl;
+        }
+
+      } else {
+        cout << "Ce n'est pas le mot mystère !" << endl;
+        cout << endl;
+      }
     }
-    else
-    {
-      cout << "Ce n'est pas le mot mystère !" << endl;
-      cout << endl;
-    }
-  }
+
+  } while (!stop);
 
   return 0;
 }
